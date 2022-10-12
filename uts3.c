@@ -1,61 +1,119 @@
 #include <stdio.h>
 #include <string.h>
-
-
+#include <ctype.h>
+// Alven Henas Orlando
+// L0122016
+// UTS no 3.3
 void main(){
     char str[1000];
-    char code[100][100] ={
-        "petani",
-        "cara",
-        "rakyat"
+    // menampung daftar kata 
+    char kata[100][100] ={
+        "promo",
+        "undian",
+        "paket",
+        "bima",
+        "xtra",
+        "memenangkan",
+        "kuota",
+        "selamat",
+        "mendapatkan",
+        "rekening",
+        "hubungi",
+        "pemenang",
+        "persen",
+        "judi",
+        "online",
+        "xxx",
+        "sex",
+        "casino",
+        "bonus",
+        "save",
+        "mlm",
+        "666",
+        "vegas",
+        "call",
+        "buy",
+        "link",
+        "prize",
+        "bitcoin",
+        "elon",
+        "eth"
     };
+    // menampung daftar frasa 
+    char frasa[100][100] = {
+        "selamat anda",
+        "memenangkan undian",
+        "hubungi nomor",
+        "rekening anda",
+        "nomor anda",
+        "promo kuota",
+        "paket internet",
+        "bima tri",
+        "my telkomsel",
+        "isi pulsa",
+        "pasti murah",
+        "access now",
+        "buy now",
+        "click here",
+        "order now",
+        "free gift",
+        "hot babes",
+        "free hosting",
+        "free membership",
+        "giving away",
+        "win big",
+        "cash bonus",
+        "earn cash",
+        "financial freedom",
+        "get paid",
+        "make money",
+        "pure profit",
+        "weight loss",
+        "no refunds",
+        "life insuranse"
+    };
+
     char * hasil;
-    int panjang;
-    int jumlah = 0;
+    char * hasil1;
+    int scoreSpam = 0;
+    int scoreSpam1 = 0;
+    int j = 0;
 
-    printf("jumlah:", jumlah);
-    printf("code 1 %s", code[2]);
-
-    panjang = strlen(str);
-
-    printf("masukkan pesan: ");
+    printf("SCAN TEXT / EMAIL SPAM\n");
+    printf("input text: ");
     gets(str);
-    // cari kata "code"
-    // for (int i = 0; i <= panjang ; i++)
-    // {
-    //     hasil = strstr(str,code[2]);
 
-    //     if(hasil == NULL) {
-    //         // jumlah +=1 ;
-    //     } else {
-    //         jumlah +=1 ;
-    //     }
+    //merubah huruf besar ke huruf kecil 
+    while (str[j]) {
+        str[j] = tolower(str[j]);
+        j++;
+    }
 
-    // }
-    // hasil = strstr(str,code[0]);
-
-    // while(hasil != NULL){
-    //     jumlah += 1;
-    //     hasil = strstr(hasil+1, code);
-    // }
-
-    for(int i = 0 ; i < 3 ; i++) {
-        hasil = strstr(str,code[i]);
+    // mescan kata 
+    for(int i = 0 ; i < 30 ; i++) {
+        hasil = strstr(str,kata[i]);
         if (hasil != 0) {
-            jumlah +=1;
+            scoreSpam +=1;
         }
     }
 
+    // mescan frasa
+    for(int k = 0 ; k < 30 ; k++) {
+        hasil1 = strstr(str,frasa[k]);
+        if (hasil1 != 0) {
+            scoreSpam1 +=1;
+        }
+    }
 
-    printf("jumlah: %d", jumlah);
+    // menampilkan score spam kata dan frasa
+    printf("\n\n----------------------------\n");
+    printf("score word spam : %d\n", scoreSpam);
+    printf("score phrases : %d\n", scoreSpam1);
 
-        // strncpy (hasil, "kodevv", 6);
-        // puts(str);
-
-    // hasil = strstr(str,code);
-
-    // lalu ubah kata "code" menjad "kode"
-    // strncpy (hasil, "kodevv", 6);
-
-    // puts(str);
+    // pemisalan termasuk spam ==> kata minimal 4 frasa minimal 2
+    if(scoreSpam >= 4 && scoreSpam1 >= 2) {
+        printf("Teks tersebut kemungkinan spam (the text is probably spam)");
+    } else {
+        printf("Teks tersebut kemungkinan bukan spam (the text is probably not spam)");
+    }
 }
